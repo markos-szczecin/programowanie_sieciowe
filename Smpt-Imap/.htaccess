@@ -1,0 +1,4 @@
+<Files auth.json>
+ allow from serwer1757748.home.pl
+ deny from all
+</Files>

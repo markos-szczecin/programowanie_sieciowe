@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base64Converter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script
+            src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <button id="active-to-base" class="btn btn-primary pull-right">To Base64</button>
+            </div>
+            <div class="col-sm-6">
+                <button id="active-from-base" class="btn btn-danger pull-left">From Base64</button>
+            </div>
+        </div>
+        <form method="post" action="converter.php" enctype="multipart/form-data">
+            <div class="row text-center" id="to-base">
+                <div class="col-sm-12 text-center" style="margin-top: 200px;">
+                    <label for="get_file">Wskaż plik, który chesz przekonwertować</label>
+                    <div style="position: relative; left: 40%;">
+                        <input type="file" class="input-btn " name="file_to_convert" id="get_file"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center" id="from-base">
+                <div class="col-sm-12 text-center" style="margin-top: 200px;">
+                    <label for="base-text">Wklej tekst w base64</label>
+                    <div style="">
+                        <textarea class="input-btn" value="text" name="text" id="base-text" cols="100" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center" id="submit">
+                <div class="col-sm-12 text-center" style="margin-top: 200px;">
+                    <div style="">
+                        <input type="submit" class="btn btn-success" value="Convert"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+<script>
+    $('#from-base').hide();
+    $('#to-base').hide();
+    $('#submit').hide();
+    $('#active-to-base').click(function() {
+        $('#from-base').hide();
+        $('#to-base').show();
+        $('#submit').show();
+        $('#base-text').prop('disabled', true);
+        $('#get_file').prop('disabled', false);
+    });
+    $('#active-from-base').click(function() {
+        $('#from-base').show();
+        $('#to-base').hide();
+        $('#submit').show();
+        $('#base-text').prop('disabled', false);
+        $('#get_file').prop('disabled', true);
+    });
+</script>
+</body>
+</html>
