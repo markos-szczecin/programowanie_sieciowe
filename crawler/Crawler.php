@@ -88,7 +88,6 @@ class Crawler
         }
         $this->_crawl($this->url, $this->depth);
 
-        // sort links alphabetically
         usort($this->results, function($a, $b) {
             if ($a['url'] == $b['url']) return 0;
             return (strtolower($a['url']) > strtolower($b['url'])) ? 1 : -1;
@@ -133,7 +132,6 @@ class Crawler
             'depth' => $depth
         );
 
-        // saving links to find difference later
         $crawled = $seen;
         $anchors = $dom->getElementsByTagName('a');
 
@@ -149,12 +147,9 @@ class Crawler
             }
 
         }
-        // set array difference from links already marked to crawl
         $crawl = array_diff($seen, $crawled);
 
-        // check if there are links to crawl
         if (!empty($crawl)) {
-            // crawl links
             array_map(array($this, '_crawl'), $crawl, array_fill(0, count($crawl), $depth - 1));
         }
 
@@ -204,10 +199,8 @@ class Crawler
                 $new_href = $this->buildUrlFromParts($parts);
                 $new_href .= $path;
             }
-            // Relative urls... (like ./viewforum.php)
             if (0 === strpos($href, './') && !empty($parts['path']))
             {
-                // If the path isn't really a path (doesn't end with slash)...
                 if (!preg_match('@/$@', $parts['path'])) {
                     $path_parts = explode('/', $parts['path']);
                     array_pop($path_parts);
