@@ -7,14 +7,23 @@ class Crawler
     private $sameHost = false;
     private $host;
     private $searchText;
+    private $endTime;
 
 
+    private function checkTime()
+    {
+        if (date('Y-m-d H:i:s') >= $this->endTime) {
+            exit;
+        }
+    }
     /**
      * @param int $timeout
      */
-    public static function setTimeLimit(int $timeout)
+    public function setTimeLimit(int $timeout) : Crawler
     {
-        set_time_limit($timeout);
+        $this->startTime = date('Y-m-d H:i:s', strtotime('+ ' . $timeout . 'seconds'));
+
+        return $this;
     }
 
     /**
@@ -112,6 +121,7 @@ class Crawler
         } else {
             echo ' <span class="red">[Błędny link]</span>';
         }
+        $this->checkTime();
         if (php_sapi_name() === 'cli') {
             echo PHP_EOL;
         } else {

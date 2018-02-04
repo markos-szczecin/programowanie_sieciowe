@@ -14,9 +14,9 @@ try {
         $data = getData($_POST);
     }
 
-    Crawler::setTimeLimit($data['time']);
     $crawler = new Crawler();
     $crawler
+        ->setTimeLimit($data['time'])
         ->setDepth($data['depth'])
         ->setUrl($data['url_start'])
         ->setSameHost($data['in_domain'])
